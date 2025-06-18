@@ -7,47 +7,47 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to add a new task
     function addTask() {
-        // Retrieve and trim the input value
         const taskText = taskInput.value.trim();
 
-        // Check if the input is not empty
         if (taskText === "") {
             alert("Please enter a task.");
             return;
         }
 
-        // Create a new list item (li) and set its text
+        // Create the list item
         const li = document.createElement('li');
-        li.textContent = taskText;
 
-        // Create a remove button for the task
+        // Create a span to hold the label and task content
+        const taskLabel = document.createElement('span');
+        taskLabel.textContent = `Task to Be Done: ${taskText}`;
+        taskLabel.style.marginRight = '10px';
+
+        // Create the remove button
         const removeButton = document.createElement('button');
         removeButton.textContent = "Remove";
         removeButton.className = 'remove-btn';
 
-        // Add click event to remove the task
+        // Remove task on click
         removeButton.onclick = function () {
             taskList.removeChild(li);
         };
 
-        // Append the remove button to the list item and then add the item to the list
+        // Append label and button to list item, then to task list
+        li.appendChild(taskLabel);
         li.appendChild(removeButton);
         taskList.appendChild(li);
 
-        // Clear the input field
+        // Clear input field
         taskInput.value = '';
     }
 
-    // Add event listener to call addTask when Add Task button is clicked
+    // Add task on button click
     addButton.addEventListener('click', addTask);
 
-    // Add event listener to input field for Enter key
+    // Add task on pressing Enter
     taskInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             addTask();
         }
     });
-
-    // Optionally call addTask here (as per instruction, though it won't do anything initially)
-    addTask();
 });
